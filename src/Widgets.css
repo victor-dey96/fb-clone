@@ -1,0 +1,4 @@
+.Widgets {
+  display: flex;
+  flex-direction: column;
+}
