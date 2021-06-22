@@ -4,12 +4,25 @@ import {Avatar} from '@material-ui/core'
 import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import { useStateValue } from './StateProvider';
+import db from './firebase';
+import firebase from 'firebase';
 
 function MessageSender() {
+    const [{user}, dispatch] = useStateValue();
     const [input, setInput] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        db.collection('posts').add({
+            message: input,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            profilePic: user.photoURL,
+            userName: user.displayName,
+            image: imageUrl 
+        });
+
         setInput('');
         setImageUrl('');
     };
@@ -17,13 +30,13 @@ function MessageSender() {
     return (
         <div className='MessageSender'>
             <div className="messageSender_top">
-            <Avatar src='https://scontent.fdel7-1.fna.fbcdn.net/v/t1.6435-9/59552912_10216928455636939_4089688792921800704_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=Zu9c9Pda58kAX_fohRZ&_nc_oc=AQmxDVFAdjn5XgmEnxVOmtrF6xeXNIWwzHvD0ewhRxUupAtY4O9wtKBaFY0phCjvTCc&tn=k08ewcYbw8A5wx5t&_nc_ht=scontent.fdel7-1.fna&oh=a4abc82eedf6cb52e5230c5791e6affd&oe=60D17EAC' />
+            <Avatar  src={user.photoURL} />
             <form>
                 <input 
                         value = {input}
                         onChange= {(e)=> setInput(e.target.value)}
                         className= 'messageSender_input' 
-                        placeholder= {`What's on your mind?`}
+                        placeholder= {`What's on your mind, ${user.displayName}?`}
                 />
                 <input 
                         value={imageUrl}

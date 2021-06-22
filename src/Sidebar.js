@@ -8,13 +8,16 @@ import ChatIcon from '@material-ui/icons/Chat';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useStateValue } from './StateProvider';
 
 function Sidebar() {
+    const [{user}, dispatch] = useStateValue();
+
     return (
         <div className= 'Sidebar'>
             <SidebarRow 
-                src='https://scontent.fdel7-1.fna.fbcdn.net/v/t1.6435-9/59552912_10216928455636939_4089688792921800704_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=Zu9c9Pda58kAX_fohRZ&_nc_oc=AQmxDVFAdjn5XgmEnxVOmtrF6xeXNIWwzHvD0ewhRxUupAtY4O9wtKBaFY0phCjvTCc&tn=k08ewcYbw8A5wx5t&_nc_ht=scontent.fdel7-1.fna&oh=a4abc82eedf6cb52e5230c5791e6affd&oe=60D17EAC'
-                title ='Victor Dey'    
+                src={user.photoURL}
+                title = {user.displayName}  
             />
             <SidebarRow 
                 Icon={LocalHospitalIcon}
