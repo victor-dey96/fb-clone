@@ -10,7 +10,7 @@ function Feed() {
     useEffect(()=>{
 
         db.collection('posts')
-        .orderBy('timestamp', 'descending')
+        .orderBy('timestamp', 'desc')
         .onSnapshot(
             (snapshot) => setPosts(
                 snapshot.docs.map(
