@@ -22,7 +22,8 @@ function Feed() {
         )
     },[]);
     
-        
+
+    
     return (
         <div className='Feed'>
             <StoryReel/>

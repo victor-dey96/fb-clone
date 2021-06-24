@@ -1,5 +1,7 @@
 .Widgets {
   display: flex;
-  justify-content: space-evenly;
   flex-direction: column;
+}
+.Widgets > iframe {
+  margin: 6px;
 }
